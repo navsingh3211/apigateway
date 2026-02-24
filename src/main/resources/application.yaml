@@ -24,6 +24,8 @@ spring:
 server:
   port: 8181
 
+#what happening above is api gateway pointing the matching path to their corresponding uri:-
+#http://localhost:8181/api/cart ----> http://localhost:8080/api/cart
 
 #spring:
 #  application:
