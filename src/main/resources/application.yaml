@@ -20,7 +20,19 @@ spring:
               uri: lb://ORDER-SERVICE
               predicates:
                 - Path=/api/orders/**, /api/cart/**
-#what happening above is api gateway pointing the matching path to their corresponding uri:-
+
+            - id: eureka-server
+              uri: http://localhost:8761/
+              predicates:
+                - Path=/eureka/main
+              filters:
+                - SetPath=/
+            - id: eureka-server-static
+              uri: http://localhost:8761/
+              predicates:
+                - Path=/eureka/**
+
+#What happening above is api gateway pointing the matching path to their corresponding uri:-
 #http://localhost:8181/api/cart ----> http://localhost:8080/api/cart
 
 #logging:
@@ -53,3 +65,6 @@ server:
 #
 #server:
 #  port: 8181
+
+
+#http://localhost:8181/eureka/main  --> eureka on api gateway
