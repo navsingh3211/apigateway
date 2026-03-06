@@ -7,17 +7,17 @@ spring:
         webflux:
           routes:
             - id: product-service
-              uri: http://localhost:8081
+              uri: lb://PRODUCT-SERVICE
               predicates:
                 - Path=/api/products/**
 
             - id: user-service
-              uri: http://localhost:8082
+              uri: lb://USERSERVICE
               predicates:
                 - Path=/api/users/**
 
             - id: order-service
-              uri: http://localhost:8080
+              uri: lb://ORDER-SERVICE
               predicates:
                 - Path=/api/orders/**, /api/cart/**
 #what happening above is api gateway pointing the matching path to their corresponding uri:-
