@@ -1,40 +1,8 @@
 spring:
   application:
     name: apigateway
-  cloud:
-    gateway:
-      server:
-        webflux:
-          routes:
-            - id: product-service
-              uri: lb://PRODUCT-SERVICE
-              predicates:
-                - Path=/api/products/**
-
-            - id: user-service
-              uri: lb://USERSERVICE
-              predicates:
-                - Path=/api/users/**
-
-            - id: order-service
-              uri: lb://ORDER-SERVICE
-              predicates:
-                - Path=/api/orders/**, /api/cart/**
-
-            - id: eureka-server
-              uri: http://localhost:8761/
-              predicates:
-                - Path=/eureka/main
-              filters:
-                - SetPath=/
-            - id: eureka-server-static
-              uri: http://localhost:8761/
-              predicates:
-                - Path=/eureka/**
-
-#What happening above is api gateway pointing the matching path to their corresponding uri:-
-#http://localhost:8181/api/cart ----> http://localhost:8080/api/cart
-
+  config:
+    import: optional:configserver:http://localhost:8889
 #logging:
 #  level:
 #    root: info
@@ -43,6 +11,14 @@ spring:
 
 server:
   port: 8181
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+
 
 #spring:
 #  application:
